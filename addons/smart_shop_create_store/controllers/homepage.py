@@ -232,6 +232,7 @@ class WebsiteHomepage(http.Controller):
         return '%s.%s' % (store_name.lower(), request.env.ref('smart_shop_create_store.domain_name').value)
 
     def create_store_partner(self, post, subdomain_name, country_id):
+	""" It will create a store partner """
         env = request.env
 
         dir_path = os.path.dirname(os.path.realpath(__file__))
