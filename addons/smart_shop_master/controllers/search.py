@@ -24,7 +24,7 @@ class WebsiteSearch(http.Controller):
             root_url += '&page=1'
 
         response = {
-            'products': False,
+            'data': False,
         }
 
         response_404 = {'Result': 'Resource Unavailable'}
@@ -55,11 +55,11 @@ class WebsiteSearch(http.Controller):
                 if page and last_page and int(page) > int(last_page):
                     return json.dumps(response_404)
 
-                response['products'] = []
+                response['data'] = []
                 for product in products:
-                    response['products'].append({
+                    response['data'].append({
                         'current_page': page,
-                        'data': {
+                        
                             'id': product.id,
                             'product_name': product.name,
                             'product_description': product.description_sale,
@@ -82,7 +82,7 @@ class WebsiteSearch(http.Controller):
                                           'medium_url': '%sweb/image/product.template/%s/image' % (
                                           req.httprequest.host_url, product.id)},
 
-                                },
+                                
                         'first_page_url': re.sub("&page=\d+", '&page=%s' % 1, root_url),
                         'last_page': last_page,
                         'next_page_url': re.sub("&page=\d+", '&page=%s' % (int(page)+1), root_url) if page and last_page != 1 else '',
